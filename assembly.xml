@@ -1,0 +1,46 @@
+<assembly>
+  <id>release</id>
+  <formats>
+    <format>tar.gz</format>
+  </formats>
+
+  <fileSets>
+    <!-- jar文件配置 -->
+    <fileSet>
+      <directory>${basedir}/target</directory>
+      <outputDirectory>lib/</outputDirectory>
+        <includes>
+          <include>*.jar</include>
+        </includes>
+    </fileSet>
+
+    <!-- config文件配置 -->
+    <fileSet>
+      <directory>src/main/resources/</directory>
+      <includes>
+        <include>*.xml</include>
+        <include>application.yml</include>
+        <include>application-prod.yml</include>
+      </includes>
+      <outputDirectory>config/</outputDirectory>
+    </fileSet>
+
+    <!-- 脚本文件配置 -->
+    <fileSet>
+      <directory>${basedir}/src/main/bin</directory>
+      <outputDirectory>bin/</outputDirectory>
+    </fileSet>
+
+  </fileSets>
+
+  <!-- 工程运行时的jar包会被保存在lib目录下 -->
+  <!--
+  <dependencySets>
+    <dependencySet>
+      <outputDirectory>lib</outputDirectory>
+      <useProjectArtifact>true</useProjectArtifact>
+      <scope>runtime</scope>
+    </dependencySet>
+  </dependencySets>
+  -->
+</assembly>
