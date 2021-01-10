@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -x
+echo 'after.......'
+set +x

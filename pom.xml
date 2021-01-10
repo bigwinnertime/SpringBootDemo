@@ -72,6 +72,13 @@
 		</dependency>
 	</dependencies>
 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>sonatype-snapshots</id>
+			<name>Sonatype Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -87,6 +94,7 @@
 				</configuration>
 			</plugin>
 
+			<!-- tar.gz -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -112,6 +120,60 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+
+			<!-- git rpm -->
+<!--			<plugin>-->
+<!--				<groupId>com.lantiainen</groupId>-->
+<!--				<artifactId>git-commit-count-maven-plugin</artifactId>-->
+<!--				<version>1.0</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<phase>validate</phase>-->
+<!--						<goals>-->
+<!--							<goal>get-git-push-count</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>rpm-maven-plugin</artifactId>
+				<version>2.2.0</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<goals>
+							<goal>rpm</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<name>spring-boot-demo</name>
+					<license>bigwinner</license>
+					<group>demo</group>
+					<packager>bigwinner</packager>
+					<prefix>/opt/modules/demo</prefix>
+					<epoch>1</epoch>
+					<release>release</release>
+					<mappings>
+						<mapping>
+							<directory>/opt/liushili/demo/conf</directory>
+							<directoryIncluded>false</directoryIncluded>
+							<sources>
+								<source>
+									<location>conf</location>
+								</source>
+							</sources>
+						</mapping>
+					</mappings>
+					<preinstallScriptlet>
+						<scriptFile>install/before-install</scriptFile>
+					</preinstallScriptlet>
+					<postinstallScriptlet>
+						<scriptFile>install/after-install</scriptFile>
+					</postinstallScriptlet>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -x
+
+echo 'before.....'
+mkdir -p /opt/liushili/demo
+
+set +x
